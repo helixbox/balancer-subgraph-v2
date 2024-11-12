@@ -4,7 +4,7 @@
   "scripts": {
     "create": "graph create balancer-labs/balancer-v2 --node https://api.thegraph.com/deploy/",
     "create:local": "graph create balancer-labs/balancer-v2 --node http://127.0.0.1:8020",
-    "codegen": "yarn generate-manifests subgraph.polygon.yaml && graph codegen --output-dir src/types/",
+    "codegen": "yarn generate-manifests subgraph.crab.yaml && graph codegen --output-dir src/types/",
     "build": "graph build",
     "lint": "eslint --max-warnings 0 . --ext .ts",
     "test": "jest ./test/*.test.ts",
@@ -17,7 +17,9 @@
     "update-addresses:goerli": "yarn update-addresses goerli",
     "update-addresses:local": "yarn update-addresses dockerParity",
     "sync": "yarn import-abis && yarn update-addresses && yarn codegen && yarn build",
-    "sync:local": "yarn import-abis && yarn update-addresses dockerParity && yarn codegen && yarn build"
+    "sync:local": "yarn import-abis && yarn update-addresses dockerParity && yarn codegen && yarn build",
+    "create:crab": "graph create helixbox/v2-balancer --node https://thegraph-g2.darwinia.network/training/deploy/",
+    "deploy:crab": "graph deploy helixbox/v2-balancer --node https://thegraph-g2.darwinia.network/training/deploy/ ./subgraph.crab.yaml"
   },
   "devDependencies": {
     "@apollo/client": "^3.3.9",
