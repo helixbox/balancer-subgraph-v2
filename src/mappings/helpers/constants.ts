@@ -1,4 +1,4 @@
-import { BigDecimal, BigInt, Address, dataSource } from '@graphprotocol/graph-ts';
+import { BigDecimal, BigInt, Address, dataSource, log } from '@graphprotocol/graph-ts';
 
 import { assets } from './assets';
 
@@ -36,6 +36,7 @@ class AddressByNetwork {
   public canonical: string;
   public custom: string;
   public fantom: string;
+  public crab: string;
 }
 
 let network: string = dataSource.network();
@@ -48,6 +49,7 @@ let vaultAddressByNetwork: AddressByNetwork = {
   canonical: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
   custom: '0x0000000000000000000000000000000000000000',
   fantom: '0x20dd72Ed959b6147912C2e529F0a0C651c33c9ce',
+  crab: '0x3aa4F2daF93803B789a2233f1c9Cb374Ceb96a6B',
 };
 
 function forNetwork(addressByNetwork: AddressByNetwork, network: string): Address {
@@ -55,8 +57,11 @@ function forNetwork(addressByNetwork: AddressByNetwork, network: string): Addres
     return Address.fromString(addressByNetwork.custom);
   } else if (network == 'fantom') {
     return Address.fromString(addressByNetwork.fantom);
+  } else if (network == 'crab') {
+    return Address.fromString(addressByNetwork.crab);
   } else {
-    return Address.fromString(addressByNetwork.canonical);
+    log.error(`\n#####!!!!!!! No network vault: {}\n`, [network]);
+    throw new Error(`forNetwork: ${network}`);
   }
 }
 
