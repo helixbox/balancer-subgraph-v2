@@ -8,4 +8,4 @@ yarn-error.log
 data/ipfs
 data/postgres
 *.js
-subgraph*.yaml
+# subgraph*.yaml
